@@ -22,6 +22,22 @@ Possibilidade de adaptação do número de funcionários por dia
 
 Quem sofre com este problema: O restaurante com a perda de lucro potencial e os clientes com a demora excessiva.
 Quais problemas o projeto vai resolver: Ociosidade e possibilidade de erro humano no monitoramento de mesas, limitando o lucro do local. 
+-----
+Nosso projeto visa reduzir prejuizos causados por mesas ociosas, tornar mais eficiente o trabalho dos garçons e atendentes, e fornecer um catalogo de dados robusto e preciso; hoje restaurantes de médio e grande porte perdem ińumeros clientes no curto e longo prazo devido a gestão lenta e ineficaz da lotação, nescessitam de mais funcionários, aumentando custos. Além de criar novas oportunidades de analise de dados e regras de negócio utilizando os dados catalogados. 
+
+ 
+
+Os usuarios finais são dividos em duas categorias: analistas de dados que irão criar projeções e regras de negocio a partir dos dados capturados e agentes em tempo real, como recepcionistas e garçons que devem lidar diretamente com a recepção e atendimento dos clientes: 
+
+-Mapeamento em tempo real. 
+
+-Alertas inteligentes 
+
+-Cronometro de ocupação 
+
+-Gestão flexivel. 
+
+-Conexão com banco de dados 
 Quem é o cliente: Restaurantes de médio/grande porte, geralmente que fazem uso de sistema de reservas.
 O problema tende a diminuir ou aumentar: O problema pode aumentar proporcionalmente à expansão do local, já que quanto maior o estabelecimento, mais monitoramento é necessário. 
 Impacta sustentabilidade: Não 
