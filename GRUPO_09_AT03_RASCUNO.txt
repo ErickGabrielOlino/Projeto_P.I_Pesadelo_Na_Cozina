@@ -1,0 +1,28 @@
+Altos tempos de espera reduzem, especialmente durante horarios de pico limitam o lucro de restaurantes de medio porte,
+signitivamente, além de reduzirem o número de clientes frequentes.
+
+Restaurantes com alta rotação, com clientela voltada para grupos de 1 a 6 pessoas em media.
+
+Catalogar horario de chegada, saida dos clientes, tal qual a quantidade de mesas e cadeiras disponiveis ao longo do dia
+e apresentar quais mesas e cadeiras estão disponiveis no momento para funcionarios. Além disso, os dados devem serão
+processados para fornecer as seguintes metricas: tempo medio de mesa ocupada, tempo medio de cadeira ocupada, tamanho medio
+de grupos de pessoas, picos de horario de entrada e saida. 
+
+
+
+Pontos chave 
+
+Monitoramento de tempo de uso das mesas 
+Monitoramento da lotação de cada tipo de mesa 
+Monitoramento do tamanho dos grupos de clientes 
+Diminuição de tempo ocioso por mesa 
+Otimização de filas e reservas 
+Melhor reconhecimento de dias e horários de pico 
+Possibilidade de adaptação do número de funcionários por dia 
+
+Quem sofre com este problema: O restaurante com a perda de lucro potencial e os clientes com a demora excessiva.
+Quais problemas o projeto vai resolver: Ociosidade e possibilidade de erro humano no monitoramento de mesas, limitando o lucro do local. 
+Quem é o cliente: Restaurantes de médio/grande porte, geralmente que fazem uso de sistema de reservas.
+O problema tende a diminuir ou aumentar: O problema pode aumentar proporcionalmente à expansão do local, já que quanto maior o estabelecimento, mais monitoramento é necessário. 
+Impacta sustentabilidade: Não 
+Custo do problema: Variável, a depender do número de pessoas em cada grupo de clientes perdido durante o dia.
