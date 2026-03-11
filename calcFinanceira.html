@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>dia mensais de funcionamento:</div>
+    <input type="number" id="ipt_dias_mensais_funcionamento" />
+    <br />
+    <br />
+    <div>recita total do dia:</div>
+    <input type="number" id="ipt_receita_dia" />
+    <br />
+    <br />
+    <div>horas de operacao diarias:</div>
+    <input type="number" id="ipt_horas_operacao" />
+    <br />
+    <br />
+    <div>tempo medio de refeicao (em minutos):</div>
+    <input type="number" id="ipt_tempo_medio_refeicao" />
+    <br />
+    <br />
+    <div>tempo medio ocioso por mesa (em minutos):</div>
+    <input type="number" id="ipt_tempo_ocioso_atual" />
+    <br />
+    <br />
+    <div>quantidade de mesas e lugares da mesa:</div>
+    <input type="number" id="ipt_mesas1" placeholder="QTY MESAS" />
+    <input type="number" id="ipt_lugares_m1" placeholder="QTY LUGARES" />
+    <br />
+    <br />
+    <div>quantidade de mesas e lugares da mesa:</div>
+    <input type="number" id="ipt_mesas2" placeholder="QTY MESAS" />
+    <input type="number" id="ipt_lugares_m2" placeholder="QTY LUGARES" />
+    <br />
+    <br />
+    <div>quantidade de mesas e lugares da mesa:</div>
+    <input type="number" id="ipt_mesas3" placeholder="QTY MESAS" />
+    <input type="number" id="ipt_lugares_m3" placeholder="QTY LUGARES" />
+    <br />
+    <br />
+    <button onclick="calcularCliente()">Calcular</button>
+    <div id="div_resposta"></div>
+  </div>
+</body>
+</html>
+<script type="text/javascript">
+  //declaracao de variaveis globais, vao ser usadas na funcao "mostrarMais()"
+    let valorPorMesas;
+    let valorPorSensor;
+    let valorServico;
+    let valorInstalacao;
+    let valorPrimeiroMes;
+    let sePaga;
+
+  let calcularCliente = () => {
+    
+    //recebe a receita media por dia (dinheiro recebido no dia)
+    let receitaDia = Number(ipt_receita_dia.value);
+    
+    //recebe o tempo em que o estabelecimento funciona por dia (em horas)
+    let horasOperacao = Number(ipt_horas_operacao.value);
+    
+    //recebe o tempo medio de refeicao (em minutos)
+    let tMedioRefeicao = Number(ipt_tempo_medio_refeicao.value);
+    
+    //recebe o tempo medio em que a mesa fica ociosa (em minutos)
+    let tOciosoAtual = Number(ipt_tempo_ocioso_atual.value);
+
+    //recebe quantos dias o estabelecimento funciona por mes
+    let diasFuncMes = Number(ipt_dias_mensais_funcionamento.value);
+
+    /* ! Recebe quantidade de mesas, quantidade de lugares das mesas 
+    e declara variavel total de lugares para cada tipo de mesa */
+    let qtyMesas1 = Number(ipt_mesas1.value);
+    let lugaresM1 = Number(ipt_lugares_m1.value);
+    let mesas1LugaresTotal;
+    let qtyMesas2 = Number(ipt_mesas2.value);
+    let lugaresM2 = Number(ipt_lugares_m2.value);
+    let mesas2LugaresTotal;
+    let qtyMesas3 = Number(ipt_mesas3.value);
+    let lugaresM3 = Number(ipt_lugares_m3.value);
+    let mesas3LugaresTotal;
+
+/////////////////////////////////////////////////////////////////////////////
+
+    //VALIDA QUANTIDADE DE MESAS E LUGARES
+    /* MESA 1: valida se quantidade de mesas e maior ou igual a zero 
+    e se quantidade de lugares e maior ou igual a zero */
+    if (qtyMesas1 >= 0) {
+      if (lugaresM1 >= 0) {
+        mesas1LugaresTotal = qtyMesas1 * lugaresM1;
+      } else {
+        //caso quantidade de lugares seja menor que zero
+        res_revPASH.innerHTML += `${lugaresM1} nao e uma quantidade de lugares valida<br>`;
+      }
+    } else {
+      //caso quantidade de mesas seja menor que zero
+      res_revPASH.innerHTML += `${qtyMesas1} nao e uma qunatidade de mesas valida<br>`;
+    }
+
+    /* MESA 2: valida se quantidade de mesas e maior ou igual a zero 
+    e se quantidade de lugares e maior ou igual a zero */
+    if (qtyMesas2 >= 0) {
+      if (lugaresM2 >= 0) {
+        mesas2LugaresTotal = qtyMesas2 * lugaresM2;
+      } else {
+        //caso quantidade de lugares seja menor que zero
+        res_revPASH.innerHTML += `${lugaresM2} nao e uma quantidade de lugares valida<br>`;
+      }
+    } else {
+      //caso quantidade de mesas seja menor que zero
+      res_revPASH.innerHTML += `${qtyMesas2} nao e uma qunatidade de mesas valida<br>`;
+    }
+
+    /* MESA 3: valida se quantidade de mesas e maior ou igual a zero 
+    e se quantidade de lugares e maior ou igual a zero */
+    if (qtyMesas3 >= 0) {
+      if (lugaresM3 >= 0) {
+        mesas3LugaresTotal = qtyMesas3 * lugaresM3;
+      } else {
+        //caso quantidade de lugares seja menor que zero
+        res_revPASH.innerHTML += `${lugaresM3} nao e uma quantidade de lugares valida`;
+      }
+    } else {
+      //caso quantidade de mesas seja menor que zero
+      res_revPASH.innerHTML += `${qtyMesas3} nao e uma quantidade de mesas valida`;
+    }
+    
+/////////////////////////////////////////////////////////////////////////////
+
+    //CALCULA A QUANTIDADE DE LUGARES TOTAIS --> soma os lugares totais de cada mesa
+    let lugaresTotais =
+    mesas1LugaresTotal + mesas2LugaresTotal + mesas3LugaresTotal;
+
+/////////////////////////////////////////////////////////////////////////////
+
+    /* VALIDA: se tempo ocioso atual da mesa e maior que zero, se tempo medio de refeicao e maior que zero e
+    calcula o giro de mesa atual SEM o sensor (quantas vezes uma mesa e ocupada por dia em media) */
+    let giroAtual;
+        if (tOciosoAtual > 0) {
+          if (tMedioRefeicao > 0) {
+            /* calcula o giro atual (sem sensor) --> divide o tempo de operacao (em minutos) pelo 
+            tempo medio de refeicao (em minutos) mais o tempo ocioso atual sem sensor (minutos) */
+            giroAtual = (horasOperacao * 60) / (tMedioRefeicao + tOciosoAtual);
+          } else {
+            //caso tempo medio de refeicao seja menor que zero
+            res_revPASH.innerHTML += `${tMedioRefeicao} nao e um tempo medio de refeicao valido`;
+          }
+        } else {
+          //caso tempo ocioso atual seja menor que zero
+          res_revPASH.innerHTML += `${tOciosoAtual} nao e um tempo ocioso valido`;
+        }
+
+/////////////////////////////////////////////////////////////////////////////
+    
+    //CALCULA RENDIMENTO DO GIRO DE MESA COM O SENSOR (quantas vezes uma mesa e ocupada por dia em media)
+    // tempo ocioso com sensor igual a 70% do tempo sem sensor (reducao de 30%)
+    let tOciosoSensor = tOciosoAtual * 0.7;
+
+    /* calula o giro com o sensor --> divide o tempo de operacao em minutos pelo 
+    tempo medio de refeicao (minutos) mais o tempo ocioso com sensor (minutos)*/
+    let giroSensor = (horasOperacao * 60) / (tMedioRefeicao + tOciosoSensor);
+
+    /* calcula a receita media diaria com o giro otimizado pelo sensor
+    receita media diaria multiplicada por - giro com o sensor dividido pelo giro atual -- representa a porcentagem*/
+    let receitaComSensor = receitaDia * (giroSensor / giroAtual);
+
+/////////////////////////////////////////////////////////////////////////////
+    
+    //CALCULA O TEMPO QUE MEDIO AS MESAS FICAM VAZIAM POR DIA
+    //sem sensor --> horas de operacao (em minutos) menos - o giro sem sensor multiplicado pelo tempo medio de refeicao -
+    let tpTotalVazia = horasOperacao * 60 - giroAtual * tMedioRefeicao;
+
+    //com sensor --> horas de operacao (em minutos) menos - o giro com sensor multiplicado pelo tempo medio de refeicao -
+    let tpTotalVaziaComSensor =
+      horasOperacao * 60 - giroSensor * tMedioRefeicao;
+
+/////////////////////////////////////////////////////////////////////////////
+    
+    //CALCULA O REVPASH COM E SEM SENSOR (quanto de dinheiro cada cadeira gera por hora) 
+    //revPASH atual (sem o sensor) --> divide a receita media diaria pela - quantidade total de lugares vezes as horas de operacao -
+    let revPASH = receitaDia / (lugaresTotais * horasOperacao);
+    
+    //melhorado (com o sensor) --> divide a receita otimizada pelo sensor pela - quantidade total de lugares vezes as horas de operacao -
+    let revPASHMelhorado = receitaComSensor / (lugaresTotais * horasOperacao);
+    
+/////////////////////////////////////////////////////////////////////////////
+    
+    //CALCULA o lucro a mais com o sensor --> receita com o sensor menos a receita sem o sensor
+    let lucroExtra = receitaComSensor - receitaDia;
+
+/////////////////////////////////////////////////////////////////////////////
+
+    //CALCULA A RECCEITA MEDIA MENSAL com e sem o sensor
+    // calcula a receita mensal SEM o sensor --> receita diaria SEM o sensor multiplicado pelos dias em que o estabelecimento fica aberto por mes
+    let receitaMes = receitaDia * diasFuncMes;
+
+    // calcula a receita mensal COM o sensor --> receita diaria COM o sensor multiplicado pelos dias em que o estabelecimento fica aberto por mes
+    let receitaMesMelhorado = receitaComSensor * diasFuncMes;
+
+/////////////////////////////////////////////////////////////////////////////
+    
+    //CALCULA O LUCRO EXTRA MENSAL
+    //receita mensal COM o sensor menos a receita mensal SEM o sensor
+    let lucroExtraMensal = receitaMesMelhorado - receitaMes;
+
+/////////////////////////////////////////////////////////////////////////////
+
+    //CALCULA O VALOR DA NOSSA ASSINATURA
+    //calcula quantidade de mesas totais --> soma todas as mesas
+    let mesasTotais = qtyMesas1 + qtyMesas2 + qtyMesas3;
+
+    //os calculos abaixo atribue os valores as variaveis globais (declaradas fora da funcao)
+    //calcula valor do serviço --> quantidade de mesas vezes 30 mais quantidade de lugares vezes 15(valores hipoteticos)
+    valorServico = mesasTotais * 30 + lugaresTotais * 10
+
+    //calcula o valor de instalacao --> 8.50 para cada lugar e 60 para cada mesa
+    valorInstalacao = lugaresTotais * 40 + mesasTotais * 150 + 1500;
+
+    //calcula quantidade de dias para o sistema pagar o proprio valor do primeiro mes --> valor do primeiro mes dividido pelo luvro extra diario com o sensor
+    sePaga = valorPrimeiroMes / lucroExtra
+
+/////////////////////////////////////////////////////////////////////////////
+
+    //interpola todos os dados em uma mensagem unica com codigo html
+    div_resposta.innerHTML = `
+        <br>
+          Total de assentos: ${lugaresTotais}<br><br>
+          <div style="border-left: 4px solid #2196F3; padding-left: 10px;">
+            <b>Análise Atual:</b><br>
+            RevPASH atual: R$ ${revPASH.toFixed(2)}<br>
+            Giro de mesa: ${giroAtual.toFixed(1)} vezes/dia<br>
+            Tempo total de mesa ociosa: ${tpTotalVazia.toFixed(0)} minutos<br>
+            Receita Media Diaria: <b>R$ ${receitaDia.toFixed(2)}</b><br>
+            Receita Media Mensal: <b>R$ ${receitaMes.toFixed(2)}</b><br>
+        </div>
+        <br>
+        <div style="border-left: 4px solid #4CAF50; padding-left: 10px;">
+            <b>Projeção com Sensores (Redução de 30% no tempo ocioso medio):</b><br>
+            <b>Novo RevPASH: R$ ${revPASHMelhorado.toFixed(2)}</b><br>
+            Novo Giro: ${giroSensor.toFixed(1)} vezes/dia<br>
+            Tempo total de mesa ociosa com o sensor: ${tpTotalVaziaComSensor.toFixed(0)} minutos<br>
+            Receita Diaria Estimada: <b>R$ ${receitaComSensor.toFixed(2)}</b><br>
+            Receita Mensal Estimada: <b>R$ ${receitaMesMelhorado.toFixed(2)}</b><br>
+        </div>
+        <br>
+        <div style="border-left: 4px solid #000000; padding-left: 10px">
+            <span style="color: green;">Ganho diário adicional: <b>R$ ${lucroExtra.toFixed(2)}</b></span><br>
+            <span style="color: green;">Ganho Mensal adicional: <b>R$ ${lucroExtraMensal.toFixed(2)}</b></span><br>
+            <span>Valor do Primeiro mes: <span style="color: #805609;"><b>R$ ${valorPrimeiroMes.toFixed(2)}</b></span></span><br>
+            <button onclick="mostrarMais()">Mostrar mais</button>
+        </div><br><br>`
+
+  };
+  let mostrarMais = () => {
+    div_resposta.innerHTML += `
+        <div style="border-left: 4px solid #000000; padding-left: 10px;">
+            <b>Valores de serviços (manutenção, hospedagem e estabilidade) e instalaçao</b><br>
+            Valor de instalacao: <b>R$ ${valorInstalacao.toFixed(2)}</b><br>
+            (mesas * R$ 30.00 + assentos * R$ 10.00)<br>
+            Valor de servico: <b>R$ ${valorServico.toFixed(2)}</b><br>
+            (mesas * R$ 150.00 + assentos * R$ 45.00 + R$ 1500.00)<br>
+            No primeiro mes voce paga: <b>R$ ${valorPrimeiroMes.toFixed(2)}</b> (servico + instalacao)<br>
+            A partir do segundo mes voce paga: <b>R$ ${valorServico.toFixed(2)}</b> (apenas valor de servico)<br><br>
+            <span style="color: green;"><b>O valor do primeiro mes se paga em ${sePaga.toFixed(0)} dias!</b></span><br>
+        </div><br><br><br>`
+  }
+</script>
