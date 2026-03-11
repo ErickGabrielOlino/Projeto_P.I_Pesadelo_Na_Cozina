@@ -218,10 +218,10 @@
     valorServico = mesasTotais * 30 + lugaresTotais * 10
 
     //calcula o valor de instalacao --> 8.50 para cada lugar e 60 para cada mesa
-    valorInstalacao = lugaresTotais * 40 + mesasTotais * 150 + 1500;
+    valorInstalacao = lugaresTotais * 40 + mesasTotais * 100 + 1500;
 
     //calcula quantidade de dias para o sistema pagar o proprio valor do primeiro mes --> valor do primeiro mes dividido pelo luvro extra diario com o sensor
-    sePaga = valorPrimeiroMes / lucroExtra
+    sePaga = valorInstalacao / lucroExtra
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -240,7 +240,7 @@
         <br>
         <div style="border-left: 4px solid #4CAF50; padding-left: 10px;">
             <b>Projeção com Sensores (Redução de 30% no tempo ocioso medio):</b><br>
-            <b>Novo RevPASH: R$ ${revPASHMelhorado.toFixed(2)}</b><br>
+            Novo RevPASH: <b>R$ ${revPASHMelhorado.toFixed(2)}</b><br>
             Novo Giro: ${giroSensor.toFixed(1)} vezes/dia<br>
             Tempo total de mesa ociosa com o sensor: ${tpTotalVaziaComSensor.toFixed(0)} minutos<br>
             Receita Diaria Estimada: <b>R$ ${receitaComSensor.toFixed(2)}</b><br>
@@ -250,7 +250,7 @@
         <div style="border-left: 4px solid #000000; padding-left: 10px">
             <span style="color: green;">Ganho diário adicional: <b>R$ ${lucroExtra.toFixed(2)}</b></span><br>
             <span style="color: green;">Ganho Mensal adicional: <b>R$ ${lucroExtraMensal.toFixed(2)}</b></span><br>
-            <span>Valor do Primeiro mes: <span style="color: #805609;"><b>R$ ${valorPrimeiroMes.toFixed(2)}</b></span></span><br>
+            <span>Valor do Primeiro mes: <span style="color: #805609;"><b>R$ ${valorInstalacao.toFixed(2)}</b></span></span><br>
             <button onclick="mostrarMais()">Mostrar mais</button>
         </div><br><br>`
 
@@ -263,9 +263,9 @@
             (mesas * R$ 30.00 + assentos * R$ 10.00)<br>
             Valor de servico: <b>R$ ${valorServico.toFixed(2)}</b><br>
             (mesas * R$ 150.00 + assentos * R$ 45.00 + R$ 1500.00)<br>
-            No primeiro mes voce paga: <b>R$ ${valorPrimeiroMes.toFixed(2)}</b> (servico + instalacao)<br>
-            A partir do segundo mes voce paga: <b>R$ ${valorServico.toFixed(2)}</b> (apenas valor de servico)<br><br>
-            <span style="color: green;"><b>O valor do primeiro mes se paga em ${sePaga.toFixed(0)} dias!</b></span><br>
+            No primeiro mes voce paga apenas a instalaçao: <b>R$ ${valorInstalacao.toFixed(2)}</b> (instalacao)<br>
+            A partir do segundo mes voce paga apenas o serviço: <b>R$ ${valorServico.toFixed(2)}</b> (apenas valor de servico!)<br><br>
+            <span style="color: green;"><b>O valor do primeiro (instalacao) mes se paga em ${sePaga.toFixed(0)} dias trabalhados!</b></span><br>
         </div><br><br><br>`
   }
 </script>
