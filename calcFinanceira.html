@@ -42,7 +42,9 @@
     <br />
     <br />
     <button onclick="calcularCliente()">Calcular</button>
-    <div id="div_resposta"></div>
+    <div id="div_resposta"></div><br>
+    <div id="div_analize"></div>
+
   </div>
 </body>
 </html>
@@ -252,11 +254,11 @@
             <span style="color: green;">Ganho Mensal adicional: <b>R$ ${lucroExtraMensal.toFixed(2)}</b></span><br>
             <span>Valor do Primeiro mes: <span style="color: #805609;"><b>R$ ${valorInstalacao.toFixed(2)}</b></span></span><br>
             <button onclick="mostrarMais()">Mostrar mais</button>
-        </div><br><br>`
+        </div><br>`
 
   };
   let mostrarMais = () => {
-    div_resposta.innerHTML += `
+    div_analize.innerHTML = `
         <div style="border-left: 4px solid #000000; padding-left: 10px;">
             <b>Valores de serviços (manutenção, hospedagem e estabilidade) e instalaçao</b><br>
             Valor de instalacao: <b>R$ ${valorInstalacao.toFixed(2)}</b><br>
@@ -265,7 +267,7 @@
             (mesas * R$ 150.00 + assentos * R$ 45.00 + R$ 1500.00)<br>
             No primeiro mes voce paga apenas a instalaçao: <b>R$ ${valorInstalacao.toFixed(2)}</b> (instalacao)<br>
             A partir do segundo mes voce paga apenas o serviço: <b>R$ ${valorServico.toFixed(2)}</b> (apenas valor de servico!)<br><br>
-            <span style="color: green;"><b>O valor do primeiro (instalacao) mes se paga em ${sePaga.toFixed(0)} dias trabalhados!</b></span><br>
+            <span style="color: green;"><b>O valor do primeiro mes (instalacao) se paga em ${sePaga.toFixed(0)} dias trabalhados!</b></span><br>
         </div><br><br><br>`
   }
 </script>
